@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <style>
+        * { margin: 0;padding: 0;list-style: none; }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--//通过v-bing：的形式将需要传递给子组件的数据以属性绑定的形式，传递到子组件内部。-->
+    <coml v-bind:parentmsg="msg"></coml>
+</div>
+<script>
+
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                msg:'123,我是父组件中的数据'
+            }
+        },
+        methods: {},
+        components:{
+            coml:{
+                // 子组件无法获取到父组件中data上的数据和methods中的方法
+                template:'<h1>这是子组件--- {{ parentmsg }}</h1>',
+                props:['parentmsg'],//props数组先定义一下传递过来的parentmsg属性，这样才能使用。
+            }
+        }
+    });
+</script>
+</body>
+</html>

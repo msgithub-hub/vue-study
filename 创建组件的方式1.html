@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+<!--如果要使用组件，直接把组件的名称，以html标签的形式，引入到页面中-->
+    <mycoml></mycoml>
+
+</div>
+<script>
+    //创建组件方式1    1.1使用Vue.extend来创建全局的vue组件
+    // var com1=Vue.extend({
+    //     // 通过template属性，指定了组件要展示html结构
+    //     template:'<h1>我爱你 </h1>'
+    // })
+    // // 1.2使用Vue.component('组件的名称'，创建出来的组件模板对象)不能驼峰命名
+    // Vue.component('mycoml',com1)
+
+    // 或者
+    Vue.component('mycoml',Vue.extend({
+            template:'<h1>我爱你 </h1>'
+        }));
+
+
+
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                id: null,
+                name: null,
+                list: [
+                    {id: 1, name: '张三1'},
+                    {id: 2, name: '张三2'},
+                    {id: 3, name: '张三3'},
+                    {id: 4, name: '张三4'},
+                ]
+            }
+        },
+        methods: {
+
+        }
+    });
+</script>
+</body>
+</html>

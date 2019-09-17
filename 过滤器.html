@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg | msgFormat('娜娜')}}</p>
+</div>
+<script>
+    // 定义一个vue的全局过滤器。名字叫：msgFormat
+    Vue.filter('msgFormat', function (msg,asg) {
+        return msg.replace(/爸爸/g,asg)
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '我是你爸爸，我真的是你爸爸，你一定要相信我是你爸爸！'
+        },
+        methods: {}
+    })
+</script>
+</body>
+</html>

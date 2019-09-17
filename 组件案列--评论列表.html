@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .list_all {
+            width: 100%;
+            padding-bottom: 10px;
+            /*background: red;*/
+        }
+
+        .list {
+            width: 80%;
+            border: 1px solid black;
+            padding: 2%;
+            margin-left: 8%;
+            margin-bottom: 20px
+        }
+
+        .chat_all {
+            width: 80%;
+            /*background: yellow;*/
+            padding: 2%;
+            margin-left: 8%;
+        }
+
+        .chat1 {
+            /*background: yellow;*/
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .man {
+            /*display: block;*/
+            line-height: 5rem;
+        }
+
+        .chat_man {
+            width: 30%;
+            height: 2rem;
+            padding-left: 10px;
+            margin-left: 1%;
+        }
+
+        .chat_man1 {
+            display: block;
+            width: 30%;
+            height: 5rem;
+            padding-left: 10px;
+            margin-left: 1%;
+        }
+
+        .btn {
+            width: 5rem;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            margin-left: 15%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <cmt-box @func="loardlist"></cmt-box>
+    <ul class="list_all">
+        <li v-for="(item,index) in list" :key="item.id" class="list">
+            <b>评论人:{{item.user}}</b>
+            <span>{{item.time}}</span>
+            <p>{{item.word}}</p>
+        </li>
+    </ul>
+
+</div>
+
+<template id="temple">
+    <div class="chat_all">
+        <div class="chat1">
+            <p>评论人:</p>
+            <input type="text" class="chat_man" v-model="user">
+        </div>
+        <div class="chat1">
+            <p class="man">内容为:</p>
+            <textarea type="text" class="chat_man1" v-model="word"></textarea>
+        </div>
+        <input type="button" value="提交" class="btn" @click="add">
+
+    </div>
+
+</template>
+<script>
+    var commentBox = {
+        template: '#temple',
+        data() {
+            return {
+                user: null,
+                word: null,
+            }
+        },
+        methods: {
+            add() {
+                let comment = {id: Date.now(), user: this.user, word: this.word, }
+                //从localStorage 中获取所有的评论
+                let list = JSON.parse(localStorage.getItem('cmts') || '[]')
+                list.unshift(comment)
+                //重新保存最新的评论数据
+                localStorage.setItem('cmts',JSON.stringify(list))
+                this.user=''
+                this.word=''
+                this.$emit('func')
+            }
+        }
+    };
+
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+
+                list: [
+                    {id: Date.now(), user: "张三", word: '1健康科技开始'},
+                    {id: Date.now(), user: "李四", word: '2健康科技开始'},
+                    {id: Date.now(), user: "王二", word: '3健康科技开始'},
+                    {id: Date.now(), user: "麻子", word: '4健康科技开始'},
+                ]
+            }
+        },
+        // 生命周期函数，类似于小程序中的onLoard()
+        created(){
+          this.loardlist()
+        },
+        methods: {
+            //从locallocalStorage中提取数据并加载到页面上
+            loardlist(){
+                let list = JSON.parse(localStorage.getItem('cmts') || '[]')
+                this.list=list
+            }
+        },
+        components: {
+            'cmt-box': commentBox
+        }
+    });
+</script>
+</body>
+</html>

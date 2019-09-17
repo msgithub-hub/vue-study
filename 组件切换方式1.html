@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #app {
+            width: 100%;
+            height: 100vh;
+            background: #1b6d85;
+            position: relative;
+        }
+
+        .app_son {
+            width: 40%;
+            height: 45vh;
+            background: yellow;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        .text{
+            width: 100%;
+            /*background: red;*/
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .text1 {
+            display: block;
+            width: 45%;
+            height: 2rem;
+            text-align: center;
+            line-height: 2rem;
+        }
+
+        .login1, .register1 {
+            width: 100%;
+            padding-top: 20px;
+            /*height/: 20vh;*/
+            padding-bottom: 20px;
+            border: 1px solid black;
+
+        }
+
+        .input {
+            width: 30%;
+            height: 2rem;
+            padding-left: 4px;
+            margin-left: 35%;
+            margin-bottom: 20px;
+            /*margin: 20px auto;*/
+        }
+
+        .input1 {
+            width: 10%;
+            height: 2rem;
+            margin-left: 45%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="app_son">
+        <div class="text">
+            <b class="text1" @click="flag=true">登录</b>
+            <b class="text1" @click="flag=false">注册</b>
+        </div>
+        <login v-if="flag"></login>
+        <register v-else="flag"></register>
+    </div>
+</div>
+<script>
+    Vue.component('login', {
+        template: '<div class="login1" style="margin-top: 10px;">' +
+        '<p><input type="text" placeholder="请填写账号" class="input"/></p>' +
+        '<p><input type="text" placeholder="请填写密码" class="input"/></p>' +
+        '<input type="button" value="登录" class="input1"/>' +
+        '</div>',
+    });
+
+    Vue.component('register', {
+        template: '<div class="register1" style="margin-top: 10px;">' +
+        '<p><input type="text" placeholder="请填写账号" class="input"/></p>' +
+        '<p><input type="text" placeholder="请填写油箱" class="input"/></p>' +
+        '<p><input type="text" placeholder="请填写密码" class="input"/></p>' +
+        '<input type="button" value="注册" class="input1"/>' +
+        '</div>',
+    });
+
+
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                flag: true
+            }
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>

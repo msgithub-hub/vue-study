@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="../vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .li {
+            width: 88vw;
+            margin-left: 5%;
+            padding: 1vh 1vw;
+            border: 1px solid black;
+            margin-bottom: 1vh;
+
+        }
+    </style>
+</head>
+<body>
+<div id="content_body">
+    <ul>
+        <li class="li" v-for="(item,index) in list" :key="item.name" @click="show(index)">
+            <p class="name">{{item.name}}</p>
+            <p class="words">{{item.words}}</p>
+        </li>
+    </ul>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#content_body',
+        data() {
+            return {
+                list: [
+                    {name: '张三1', words: '1.好几十防水砂浆积分富士康回家舒服舒服舒服单顺'},
+                    {name: '张三2', words: '2.好几十防水砂浆积分富士康回家舒服舒服舒服单顺'},
+                    {name: '张三3', words: '3.好几十防水砂浆积分富士康回家舒服舒服舒服单顺'},
+                    {name: '张三4', words: '4.好几十防水砂浆积分富士康回家舒服舒服舒服单顺'},
+                    {name: '张三5', words: '5.好几十防水砂浆积分富士康回家舒服舒服舒服单顺'},
+                ]
+            }
+
+        },
+        methods: {
+            show(index) {
+                console.log("我是：" + index)
+            },
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="../vue.min.js"></script>
+    <style>
+        .bgBox {
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+            border: 1px solid #cccccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content_body">
+    <mycontent></mycontent>
+
+</div>
+<script>
+    let app = new Vue({
+        el: '.content_body',
+        data() {
+            return {}
+        },
+        methods: {},
+
+        // 局部组件
+        components: {
+            mycontent: {
+
+                data() {
+                    return {
+                        colorArr: ['red', 'blue', 'green', 'yellow']
+                    }
+                },
+                template: `<div>
+                    <button
+                      v-for="(item,index) in colorArr"
+                      :key="item"
+                      :style="{backgroundColor:item}"
+                      @click="handleClick(item)"
+                      >{{item}}</button>
+                      <div class="bgBox" ref="changeBg"></div>
+
+                </div>`,
+                methods: {
+                    handleClick(item) {
+                        let changeBg = this.$refs.changeBg;
+                        changeBg.style.backgroundColor=item;
+                        console.log(this.$refs)
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

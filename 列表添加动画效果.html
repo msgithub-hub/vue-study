@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .list {
+            width: 70%;
+            height: 2rem;
+            margin-left: 15%;
+            border: 1px solid red;
+            text-align: center;
+            line-height: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .v-enter, .v-leave-to {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <label>id:<input type="text" value="" v-model="id"/></label>
+        <label>姓名:<input type="text" value="" v-model="name"/></label>
+        <input type="button" value="添加" @click="add()"/>
+    </div>
+    <ul>
+        <!--如果需要过渡效果的元素是通过v-for来的，不能用transition标签，只能用transition-group-->
+        <transition-group >
+            <li class="list" v-for="(item,index) in list" :key="item.id" @click="show(index)">
+                {{item.id}}--------{{item.name}}
+                <b @click="del(index)">删除</b>
+            </li>
+        </transition-group>
+
+
+
+    </ul>
+
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                id: null,
+                name: null,
+                list: [
+                    {id: 1, name: '张三1'},
+                    {id: 2, name: '张三2'},
+                    {id: 3, name: '张三3'},
+                    {id: 4, name: '张三4'},
+                ]
+            }
+        },
+        methods: {
+            add() {
+                this.list.unshift(
+                    {id: this.id, name: this.name}
+                );
+                this.id='';
+                this.name=''
+
+            },
+            show(index){
+                console.log(index)
+            },
+            del(index){
+                this.list.splice(index,1)
+            }
+        }
+    });
+</script>
+</body>
+</html>

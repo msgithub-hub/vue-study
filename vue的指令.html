@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <style>
+        [v-cloak]{
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+<div class="app">
+    <p v-cloak="">发货时间放假{{msg}}健身房就开始深V</p>
+
+    <!--1.默认v-text是没有闪烁问题。2、v-text会覆盖原本标签中的内容，二v-cloak不会，他会保留所有的内容。3、v-html会保留msg标签的样式。-->
+    <!--v-bind是vue中用于绑定的指令-->
+    <h2 v-text="msg"></h2>
+    <h3 v-html="msg2" style="color: red"></h3>
+    <input type="button" value="按钮" v-bind:title="mytittle+'412'">
+
+    <!--v-bind可简写成英文的 : (冒号)-->
+    <input type="button" value="按钮" :title="mytittle+'412'"><br/>
+
+    <!--v-on:vue中的事件绑定，可以缩写成 @-->
+    <!--<input type="button" value="按钮" v-on:click="show">-->
+    <input type="button" value="按钮1" @click="show">
+
+</div>
+
+
+<script src="vue.min.js"></script>
+<script>
+    var vm=new Vue({
+       el:'.app',
+       data:{
+           msg:'888888888',
+           msg2:'<h1>12345678</h1>',
+           mytittle:'我是帅帅的按钮'
+       },
+        methods:{  //methods定义了所有vue中的实例所有可能的方法
+           show() {
+               // alert("hahahh")
+              window.open('https://www.baidu.com','_self')
+           }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Title</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+<div class="app">
+    <input type="button" value="动起来" @click="lang">
+    <input type="button" value="停止" @click="stop">
+    <h1>{{msg}}</h1>
+</div>
+<script>
+    //注意：在app实例中，如果想要获取data上的数据，或者想要调用methods中的方法，必须通过this.数据属性名  或  this.方法名来进行访问，这里的this，就表示我们new出来的 app实例对象。
+    let app = new Vue({
+        el: '.app',
+        data: {
+            msg: '猥琐发育，别浪!``',
+            intervalId:null
+        },
+        methods: {
+            lang() {
+
+                if(this.intervalId !=null){
+                    return
+                }
+                 this.intervalId=setInterval(()=>{
+                    console.log(this.msg)
+                    //获取到的第一个字符
+                    var start=this.msg.substring(0,1);
+                    //获取到后面所有的字符
+                    var end=this.msg.substring(1);
+                    //重新拼接得到新的字符串，并赋值给 this.msg
+                    this.msg=end+start;
+                },400)
+            },
+            stop(){
+                clearInterval(this.intervalId);
+                this.intervalId=null;
+            }
+
+
+
+        }
+    })
+</script>
+</body>
+</html>

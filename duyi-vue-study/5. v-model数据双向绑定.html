@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="../vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .li {
+            width: 88vw;
+            margin-left: 5%;
+            padding: 1vh 1vw;
+            border: 1px solid black;
+            margin-bottom: 1vh;
+
+        }
+    </style>
+</head>
+<body>
+<div id="content_body">
+    <input type="text" v-model="value"/>
+    <p>{{ value }}</p>
+    <hr/>
+    <br/><br/>
+
+    <!--v-model绑定复选框-->
+    <label for="html">html</label>
+    <input type="checkbox" value="html" id="html" v-model="checkList">
+    <label for="css">css</label>
+    <input type="checkbox" value="css" id="css" v-model="checkList">
+    <label for="vue">vue</label>
+    <input type="checkbox" value="vue" id="vue" v-model="checkList">
+    <p>{{checkList}}</p>
+    <hr/>
+    <br/><br/>
+
+    <!--v-model 单选框radio-->
+    <label for="html">html</label>
+    <input type="radio" value="html" v-model="oneCheck">
+    <label for="css">css</label>
+    <input type="radio" value="css" v-model="oneCheck">
+    <label for="vue">vue</label>
+    <input type="radio" value="vue" v-model="oneCheck">
+    <p>{{oneCheck}}</p>
+    <hr/>
+    <br/><br/>
+
+    <!--v-model selected 单选-->
+    <select name="" id="" v-model="selected">
+        <option value="" disabled>请选择</option>
+        <option value="html">html</option>
+        <option value="js">js</option>
+        <option value="vue">vue</option>
+    </select>
+    <p>{{selected}}</p>
+    <br/><br/>
+
+    <!--v-model selected 多选-->
+    <select name=""  v-model="selected1" multiple>
+        <!--<option value="" disabled>请选择</option>-->
+        <option value="html">html</option>
+        <option value="js">js</option>
+        <option value="vue">vue</option>
+    </select>
+    <span>{{selected1}}</span>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#content_body',
+        data() {
+            return {
+                value: '哈哈',
+                checkList: [],
+                oneCheck: '',
+                selected: '',
+                selected1: []
+            }
+
+        },
+        methods: {}
+    })
+</script>
+</body>
+</html>

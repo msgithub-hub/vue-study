@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.1.2/vue-router.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .v-enter, .v-leave-to {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: all 0.5s ease;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div class="app_son">
+        <!--第一种方法-->
+        <!--<a href="#/login">登录</a>-->
+        <!--<a href="#/zhuce">注册</a>-->
+
+        <!--第二种方法-->
+        <!--//router-link是默认渲染为一个a标签-->
+
+        <router-link to="/login/11" tag="span">登录</router-link>
+        <router-link to="/zhuce" tag="span">注册</router-link>
+
+
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+</div>
+
+
+<script>
+    //组件模板对象
+    var login = {
+        template: '<h3>我是登录组件---{{this.$route.params.id}}</h3>',
+        // 生命周期函数created()
+        created() {
+            console.log(this.$route)
+            // console.log(this.$route.query)
+        }
+    };
+    var zhuce = {
+        template: '<h3>我是注册组件</h3>',
+    };
+
+    var routerObj = new VueRouter({
+        routes: [//路由匹配规则
+            {path: '/', redirect: '/login'},//强制重新定向（默认向你展示的那一页）
+            {path: '/login/:id', component: login},
+            {path: '/zhuce', component: zhuce},
+        ]
+    });
+
+
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                message: '我爱你 Vue!'
+            }
+        },
+        methods: {},
+        router: routerObj
+    })
+</script>
+</body>
+</html>

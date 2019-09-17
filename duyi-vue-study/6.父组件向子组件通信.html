@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="../vue.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div class="content_body">
+    <mycontent v-bind="wenzhang" @add="handleAdd"></mycontent>
+
+    <!--<mycontent v-bind="wenzhang" @add="handleAdd"></mycontent>-->
+    <p>父组件中的number：{{ wenzhang.number }}</p>
+</div>
+<script>
+    let app = new Vue({
+        el: '.content_body',
+        data() {
+            return {
+                wenzhang: {
+                    tittle: "粉红色付款",
+                    number: 0,
+                    content: '副书记方科技金风科技深刻结合实际弗格森接口不可拒收复苏法开挖防擦卡很卡覅花粉司法考试'
+                },
+            }
+        },
+        methods: {
+            handleAdd(num) {
+                this.wenzhang.number = num;
+                this.wenzhang.tittle="俺最帅"
+            }
+        },
+
+        // 局部组件
+        components: {
+            mycontent: {
+                // 第一种props写法
+                // props: ['tittle', 'content', 'number'],
+                // 第二种props写法
+                props: {
+                    tittle: {
+                        type: String,
+                        default: '我最帅',
+                    },
+                    content: {
+
+                    },
+                    number:{
+
+                    }
+                },
+                data() {
+                    return {
+                        ownNumber : this.number,
+                    }
+                },
+                template: `<div>
+                    <h1>{{tittle}}</h1>
+                    <p>子组件中的number：{{ ownNumber }}</p>
+                    <p>{{content}}</p>
+                    <button @click="handleClick">add</button>
+                </div>`,
+                methods: {
+                    handleClick() {
+                        this.ownNumber += 1;
+                        this.$emit('add', this.ownNumber)
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

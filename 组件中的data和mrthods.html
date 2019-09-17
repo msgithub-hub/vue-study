@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <mycoml></mycoml>
+
+</div>
+<script>
+    Vue.component('mycoml',{
+        template:'<p>我爱你+{{msg}}</p>',
+        data(){
+            return{
+                msg:'qqqqqqqqqq'
+            }
+        }
+    });
+
+
+
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+
+            }
+        },
+        methods: {
+
+        }
+    });
+</script>
+</body>
+</html>

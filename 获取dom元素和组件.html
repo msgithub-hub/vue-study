@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+</head>
+<body>
+<!--2019.3.19-->
+
+<div id="app">
+    <input type="button" value="获取元素" @click="getElement">
+    <h1 id="haha" class="haha" ref="didi">{{ message }}</h1>
+</div>
+
+
+<script>
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return{
+                message: '我爱你 Vue!'
+            }
+
+        },
+        methods:{
+            getElement(){
+                // vue不支持你去操作DOM元素
+                // console.log(document.getElementsByClassName('haha')[0].innerText)
+
+                // 因为$refs是vue自带的，所以可以直接用this.$refs来获取你想要的信息
+                console.log(this.$refs.didi.innerText)
+            }
+        }
+    })
+</script>
+</body>
+</html>

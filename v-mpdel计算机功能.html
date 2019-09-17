@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="vue.min.js"></script>
+    <style>
+        #app{
+            background: red;
+            padding-top: 5vw;
+            padding-bottom: 5vw;
+        }
+        input,select{
+            width: 10vw;
+            height: 10vh;
+            font-size: 5vw;
+            text-align: center;
+            color: green;
+        }
+       
+    </style>
+</head>
+<body>
+<div id="app" >
+    <input type="text" v-model="n1"/>
+    <select v-model="opt">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" v-model="n2"/>
+    <input type="button" value="=" @click="calc"/>
+    <input type="text" v-model="result"/>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            n1: 0,
+            n2: 0,
+            result: 0,
+            opt: '+'
+        },
+        methods: {
+            calc() {
+                // switch (this.opt) {
+                //     case '+':
+                //         this.result = parseInt(this.n1) + parseInt(this.n2);
+                //         break;
+                //     case '-':
+                //         this.result = parseInt(this.n1) - parseInt(this.n2);
+                //         break;
+                //     case '*':
+                //         this.result = parseInt(this.n1) * parseInt(this.n2);
+                //         break;
+                //     case '/':
+                //         this.result = parseInt(this.n1) / parseInt(this.n2);
+                //         break;
+                // }
+
+                var codeStr='parseInt(this.n1)' +this.opt+ 'parseInt(this.n2)'
+                this.result=eval(codeStr)
+
+            }
+        },
+    })
+</script>
+</body>
+</html>
